@@ -1,0 +1,83 @@
+CREATE TABLE customer
+(
+  customer_Name INT NOT NULL,
+  customer_id INT NOT NULL,
+  phone_number INT NOT NULL,
+  Details INT NOT NULL,
+  PRIMARY KEY (customer_id)
+);
+
+CREATE TABLE medicine_details
+(
+  medicine_id INT NOT NULL,
+  medicine_name INT NOT NULL,
+  medicine_description INT NOT NULL,
+  quantity INT NOT NULL,
+  prize INT NOT NULL,
+  PRIMARY KEY (medicine_id)
+);
+
+CREATE TABLE pharmasist
+(
+  pharmasist_id INT NOT NULL,
+  pharmasist_name INT NOT NULL,
+  email INT NOT NULL,
+  details INT NOT NULL,
+  PRIMARY KEY (pharmasist_id)
+);
+
+CREATE TABLE customer
+(
+  customer_add1 INT NOT NULL,
+  customer_add2 INT NOT NULL,
+  customer_country INT NOT NULL,
+  customer_id INT NOT NULL,
+  customer_id INT NOT NULL,
+  FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
+);
+
+CREATE TABLE quantity
+(
+  quantity_id INT NOT NULL,
+  quantity_no INT NOT NULL,
+  customer_id INT NOT NULL,
+  medicine_id INT NOT NULL,
+  PRIMARY KEY (quantity_id),
+  FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
+  FOREIGN KEY (medicine_id) REFERENCES medicine_details(medicine_id)
+);
+
+CREATE TABLE prescription
+(
+  prescription_id INT NOT NULL,
+  prescription INT NOT NULL,
+  pharmasist_id INT NOT NULL,
+  quantity_id INT NOT NULL,
+  PRIMARY KEY (prescription_id),
+  FOREIGN KEY (pharmasist_id) REFERENCES pharmasist(pharmasist_id),
+  FOREIGN KEY (quantity_id) REFERENCES quantity(quantity_id)
+);
+
+CREATE TABLE order
+(
+  order_id INT NOT NULL,
+  order_no INT NOT NULL,
+  date INT NOT NULL,
+  shipping INT NOT NULL,
+  arrival INT NOT NULL,
+  prescription_id INT NOT NULL,
+  PRIMARY KEY (order_id),
+  FOREIGN KEY (prescription_id) REFERENCES prescription(prescription_id)
+);
+
+CREATE TABLE payment
+(
+  payment_id INT NOT NULL,
+  order_no INT NOT NULL,
+  arrival_date INT NOT NULL,
+  payment_method INT NOT NULL,
+  pay_success INT NOT NULL,
+  order_id INT NOT NULL,
+  PRIMARY KEY (payment_id),
+  FOREIGN KEY (order_id) REFERENCES order(order_id)
+);
