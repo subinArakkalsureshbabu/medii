@@ -1,0 +1,41 @@
+
+<html>
+<head>
+
+<?php
+
+require_once "db.php";
+require_once "function.php";
+
+
+
+if( isset($_POST['submit']) ){
+
+  $name     = $_POST['name'];
+  $info     = $_POST['info'];
+  $picture  = $_FILES['picture'];
+
+
+  if(!empty(trim($name)) && !empty(trim($info)) ) {
+
+        if(add_data($name, $info, $picture)) {
+      echo "success";
+    }else{
+      echo "fail";
+    }
+
+  }else{
+    echo 'The data is empty';
+  }
+}
+
+
+?>
+
+</head>
+
+<body>
+
+
+
+   
